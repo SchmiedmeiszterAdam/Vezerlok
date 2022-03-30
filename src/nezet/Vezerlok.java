@@ -5,7 +5,9 @@
  */
 package nezet;
 
-import javafx.scene.control.RadioButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import static javafx.beans.binding.Bindings.when;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
@@ -23,7 +25,7 @@ public class Vezerlok extends javax.swing.JFrame {
         initComponents();
         rdbEleje.setEnabled(false);
         rdbVege.setEnabled(false);
-
+        
     }
 
     /**
@@ -295,7 +297,16 @@ public class Vezerlok extends javax.swing.JFrame {
 
         jLabel3.setText("Új szak:");
 
-        txtujSzak.setText("jTextField1");
+        txtujSzak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtujSzakActionPerformed(evt);
+            }
+        });
+        txtujSzak.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtujSzakKeyPressed(evt);
+            }
+        });
 
         btnComboba.setText("Felvesz");
         btnComboba.addActionListener(new java.awt.event.ActionListener() {
@@ -427,15 +438,21 @@ public class Vezerlok extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJelszotMutatActionPerformed
 
     private void btnCombobaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombobaActionPerformed
-        jComboBox1.addItem(txtujSzak.getText());
+        if (txtujSzak.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this.rootPane, "Nincs szak beírva!");
+        } else {
+            jComboBox1.addItem(txtujSzak.getText());
+            txtujSzak.setText("");
+        }
     }//GEN-LAST:event_btnCombobaActionPerformed
 
     private void btnListbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListbeActionPerformed
+        
         if (fejlecEnged.isSelected() || jComboBox1.getSelectedIndex() > 0) {
             DefaultListModel dlm = new DefaultListModel();
-
+            
             ListModel<String> listModel = jList1.getModel();
-
+            
             if (chbHozzaFuz.isSelected()) {
                 for (int i = 0; i < listModel.getSize(); i++) {
                     dlm.addElement(listModel.getElementAt(i));
@@ -448,7 +465,7 @@ public class Vezerlok extends javax.swing.JFrame {
             } else {
                 dlm.addElement(szak);
             }
-
+            
             jList1.setModel(dlm);
         } else {
             JOptionPane.showMessageDialog(this.rootPane, "Nincs szak kiválasztva!");
@@ -506,6 +523,16 @@ public class Vezerlok extends javax.swing.JFrame {
             rdbVege.setEnabled(false);
         }
     }//GEN-LAST:event_chbHozzaFuzActionPerformed
+
+    private void txtujSzakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtujSzakActionPerformed
+
+    }//GEN-LAST:event_txtujSzakActionPerformed
+
+    private void txtujSzakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtujSzakKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            //btnCombobaActionPerformed();
+        }
+    }//GEN-LAST:event_txtujSzakKeyPressed
 
     /**
      * @param args the command line arguments
