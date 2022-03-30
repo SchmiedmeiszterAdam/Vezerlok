@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import static javafx.beans.binding.Bindings.when;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
@@ -25,7 +27,7 @@ public class Vezerlok extends javax.swing.JFrame {
         initComponents();
         rdbEleje.setEnabled(false);
         rdbVege.setEnabled(false);
-        
+
     }
 
     /**
@@ -83,8 +85,13 @@ public class Vezerlok extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Vezérlők használata");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -366,6 +373,11 @@ public class Vezerlok extends javax.swing.JFrame {
         jMenu1.add(jSeparator1);
 
         jMenuItem3.setText("Kilépés");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
@@ -447,12 +459,12 @@ public class Vezerlok extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCombobaActionPerformed
 
     private void btnListbeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListbeActionPerformed
-        
+
         if (fejlecEnged.isSelected() || jComboBox1.getSelectedIndex() > 0) {
             DefaultListModel dlm = new DefaultListModel();
-            
+
             ListModel<String> listModel = jList1.getModel();
-            
+
             if (chbHozzaFuz.isSelected()) {
                 for (int i = 0; i < listModel.getSize(); i++) {
                     dlm.addElement(listModel.getElementAt(i));
@@ -465,7 +477,7 @@ public class Vezerlok extends javax.swing.JFrame {
             } else {
                 dlm.addElement(szak);
             }
-            
+
             jList1.setModel(dlm);
         } else {
             JOptionPane.showMessageDialog(this.rootPane, "Nincs szak kiválasztva!");
@@ -497,8 +509,7 @@ public class Vezerlok extends javax.swing.JFrame {
         } else {
             if (jCheckBox1.isSelected()) {
                 jTextArea1.setText("Kér hírlevelet");
-            }
-            else{
+            } else {
                 jTextArea1.setText("Nem kér hírlevelet");
             }
         }
@@ -536,6 +547,14 @@ public class Vezerlok extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtujSzakKeyPressed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        kilepes();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        kilepes();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -570,7 +589,17 @@ public class Vezerlok extends javax.swing.JFrame {
             }
         });
     }
-
+    public void kilepes(){
+        String ObjButtons[] = {"Igen", "Nem"};
+        ImageIcon icon = new ImageIcon("src/sadHusky.jpg");
+        int kilepes = JOptionPane.showOptionDialog(null,
+                "Biztos ki szeretne lépni?", "Rendszer értesítés",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon,
+                ObjButtons, ObjButtons[1]);
+        if (kilepes == 0) {
+            System.exit(WIDTH);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComboba;
     private javax.swing.JButton btnJelszotMutat;
