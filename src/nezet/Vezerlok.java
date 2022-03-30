@@ -5,12 +5,10 @@
  */
 package nezet;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import static javafx.beans.binding.Bindings.when;
 import javax.swing.DefaultListModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 
@@ -313,6 +311,9 @@ public class Vezerlok extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtujSzakKeyPressed(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtujSzakKeyReleased(evt);
+            }
         });
 
         btnComboba.setText("Felvesz");
@@ -542,9 +543,7 @@ public class Vezerlok extends javax.swing.JFrame {
     }//GEN-LAST:event_txtujSzakActionPerformed
 
     private void txtujSzakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtujSzakKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnComboba.doClick();
-        }
+        
     }//GEN-LAST:event_txtujSzakKeyPressed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -554,6 +553,12 @@ public class Vezerlok extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         kilepes();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void txtujSzakKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtujSzakKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnComboba.doClick();
+        }
+    }//GEN-LAST:event_txtujSzakKeyReleased
 
     /**
      * @param args the command line arguments
@@ -591,12 +596,12 @@ public class Vezerlok extends javax.swing.JFrame {
     }
     public void kilepes(){
         String ObjButtons[] = {"Igen", "Nem"};
-        ImageIcon icon = new ImageIcon("src/sadHusky.jpg");
+        Icon icon = new ImageIcon(this.getClass().getResource("kepek/sadHusky.jpg"));
         int kilepes = JOptionPane.showOptionDialog(null,
                 "Biztos ki szeretne lépni?", "Rendszer értesítés",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, icon,
                 ObjButtons, ObjButtons[1]);
-        if (kilepes == 0) {
+        if (kilepes == JOptionPane.OK_OPTION) {
             System.exit(WIDTH);
         }
     }
