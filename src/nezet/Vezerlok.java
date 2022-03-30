@@ -21,6 +21,9 @@ public class Vezerlok extends javax.swing.JFrame {
      */
     public Vezerlok() {
         initComponents();
+        rdbEleje.setEnabled(false);
+        rdbVege.setEnabled(false);
+
     }
 
     /**
@@ -270,6 +273,11 @@ public class Vezerlok extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Dinamikus tartalom"));
 
         chbHozzaFuz.setText("hozzáfűz");
+        chbHozzaFuz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbHozzaFuzActionPerformed(evt);
+            }
+        });
 
         btnListbe.setText("combo tartalmát Listbe");
         btnListbe.addActionListener(new java.awt.event.ActionListener() {
@@ -488,6 +496,16 @@ public class Vezerlok extends javax.swing.JFrame {
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
 
     }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void chbHozzaFuzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbHozzaFuzActionPerformed
+        if (chbHozzaFuz.isSelected()) {
+            rdbEleje.setEnabled(true);
+            rdbVege.setEnabled(true);
+        } else {
+            rdbEleje.setEnabled(false);
+            rdbVege.setEnabled(false);
+        }
+    }//GEN-LAST:event_chbHozzaFuzActionPerformed
 
     /**
      * @param args the command line arguments
