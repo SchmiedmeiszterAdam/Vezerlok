@@ -530,7 +530,7 @@ public class Vezerlok extends javax.swing.JFrame {
 
     private void txtujSzakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtujSzakKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            //btnCombobaActionPerformed();
+            btnComboba.doClick();
         }
     }//GEN-LAST:event_txtujSzakKeyPressed
 
